@@ -23,9 +23,14 @@ const addBook = book => {
     add(book)
   }
 }
-
 const getBook = id => get(id, 'vbookPrices', getBookTransformer)
-const updateBook = book => update(book)
+const updateBook = book => {
+  if (dalHelper === 'dal-mysql-helper') {
+    return updateMySQLBook(book, 'book', postBookTransformer)
+  } else {
+    update(book)
+  }
+}
 const deleteBook = id => deleteDoc(id)
 const addAuthor = author =>
   add(assoc('_id', pkGen('author', '_', prop('name', author)), author))
