@@ -16,7 +16,8 @@ const {
   deleteDoc,
   addMySQLBook,
   updateMySQLBook,
-  addMySQLAuthor
+  addMySQLAuthor,
+  updateMySQLAuthor
 } = require(`./lib/${dalHelper}`)
 
 //BOOKS
@@ -33,10 +34,17 @@ const updateBook = book => {
   if (dalHelper === 'dal-mysql-helper') {
     return updateMySQLBook(book, postBookTransformer)
   } else {
-    update(book)
+    return update(book)
   }
 }
-const deleteBook = id => deleteDoc(id)
+//const deleteBook = id => deleteDoc(id)
+const deleteBook = id => {
+  if (dalHelper === 'dal-mysql-helper') {
+    return deleteDoc(id, 'book')
+  } else {
+    return deleteDoc(id)
+  }
+}
 
 //AUTHORS
 const addAuthor = author => {
@@ -48,8 +56,23 @@ const addAuthor = author => {
   }
 }
 const getAuthor = id => get(id, 'author', getAuthorTransformer)
-const updateAuthor = author => update(author)
-const deleteAuthor = id => deleteDoc(id)
+//const updateAuthor = author => update(author)
+
+const updateAuthor = o => {
+  if (dalHelper === 'dal-mysql-helper') {
+    return updateMySQLAuthor(o, postAuthorTransformer)
+  } else {
+    update(o)
+  }
+}
+//const deleteAuthor = id => deleteDoc(id)
+const deleteAuthor = id => {
+  if (dalHelper === 'dal-mysql-helper') {
+    return deleteDoc(id, 'author')
+  } else {
+    return deleteDoc(id)
+  }
+}
 
 const dal = {
   addBook,
