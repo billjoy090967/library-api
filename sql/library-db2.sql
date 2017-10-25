@@ -43,7 +43,7 @@ CREATE TABLE `bookPrice` (
   `price` decimal(10,2) unsigned NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_bookPrice_bookID_idx` (`bookID`),
-  CONSTRAINT `FK_bookPrice_bookID` FOREIGN KEY (`bookID`) REFERENCES `book` (`ID`)
+  CONSTRAINT `FK_bookPrice_bookID` FOREIGN KEY (`bookID`) REFERENCES `book` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 INSERT INTO `bookPrice` VALUES (1,1,'hardback',9.99),(2,1,'audio',19.99),(3,1,'kindle',19.99),(4,1,'paperback',8.99),(5,4,'paperback',28.99),(6,4,'hardback',8.99),(7,2,'hardback',19.00);
