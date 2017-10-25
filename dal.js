@@ -3,7 +3,8 @@ const { prop, assoc } = require('ramda')
 const {
   getBookTransformer,
   postBookTransformer,
-  postAuthorTransformer
+  postAuthorTransformer,
+  getAuthorTransformer
 } = require('./lib/dal-mysql-transformers')
 const dalHelper =
   process.env.DAL === 'mysql-dal' ? 'dal-mysql-helper' : 'dal-helper'
@@ -18,6 +19,7 @@ const {
   addMySQLAuthor
 } = require(`./lib/${dalHelper}`)
 
+//BOOKS
 const addBook = book => {
   book._id = pkGen('book', '_', book.title)
   if (dalHelper === 'dal-mysql-helper') {
@@ -36,7 +38,7 @@ const updateBook = book => {
 }
 const deleteBook = id => deleteDoc(id)
 
-//AUTHOR
+//AUTHORS
 const addAuthor = author => {
   if (dalHelper === 'dal-mysql-helper') {
     return addMySQLAuthor(author, postAuthorTransformer)
@@ -45,10 +47,7 @@ const addAuthor = author => {
     add(author)
   }
 }
-
-//const addAuthor = author =>
-//  add(assoc('_id', pkGen('author', '_', prop('name', author)), author))
-const getAuthor = id => get(id)
+const getAuthor = id => get(id, 'author', getAuthorTransformer)
 const updateAuthor = author => update(author)
 const deleteAuthor = id => deleteDoc(id)
 
