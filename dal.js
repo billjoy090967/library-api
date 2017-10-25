@@ -12,7 +12,8 @@ const {
   get,
   update,
   deleteDoc,
-  addMySQLBook
+  addMySQLBook,
+  updateMySQLBook
 } = require(`./lib/${dalHelper}`)
 
 const addBook = book => {
@@ -26,7 +27,7 @@ const addBook = book => {
 const getBook = id => get(id, 'vbookPrices', getBookTransformer)
 const updateBook = book => {
   if (dalHelper === 'dal-mysql-helper') {
-    return updateMySQLBook(book, 'book', postBookTransformer)
+    return updateMySQLBook(book, postBookTransformer)
   } else {
     update(book)
   }

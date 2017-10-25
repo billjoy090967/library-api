@@ -63,5 +63,5 @@ SELECT book.ID as ID
 , bookPrice.type
 , bookPrice.price
 FROM book 
-INNER JOIN bookPrice ON book.ID = bookPrice.bookID
+LEFT JOIN bookPrice ON book.ID = bookPrice.bookID
 

@@ -4,7 +4,7 @@
   "description": "An api to manage books and their authors.",
   "main": "app.js",
   "scripts": {
-    "start": "PORT=5555 node app.js",
+    "start": "node app.js",
     "test": "NODE_ENV=test tape test/**/*-test.js | faucet",
     "testVerbose": "NODE_ENV=test tape test/**/*-test.js"
   },

@@ -192,6 +192,7 @@ app.use((foo, req, res, next) => {
 app.use((err, req, res, next) => res.status(err.status || 500).send(err))
 
 if (process.env.NODE_ENV !== 'test') {
+  console.log('PORT = ', port)
   app.listen(port, () =>
     console.log(`API is up on port with ${process.env.DAL}`, port)
   )
